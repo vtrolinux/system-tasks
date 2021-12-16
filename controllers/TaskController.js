@@ -26,7 +26,18 @@ module.exports = class TaskController {
         res.render('tasks/all',{tasks})
 
     }
-    
+
+    static async updateTask(req, res){
+
+        const id = req.params.id
+        const task = await Task.findOne({where:{id:id}, raw: true})
+        res.render('tasks/edit', {task})
+    }
+
+    static async updateTaskSave(req, res){
+        
+    }
+
     static async removeTask(req, res) {
 
         const id = req.body.id
