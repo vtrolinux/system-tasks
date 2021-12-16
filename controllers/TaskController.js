@@ -11,13 +11,14 @@ module.exports = class TaskController {
             description: req.body.description,
             done: false,
         }
-        
+
         // supostas validacoes-regex...
 
         await Task.create(task)
         res.redirect('/tasks')
     }
-    static showTasks(req, res){
-        res.render('tasks/all')
+    static async showTasks(req, res){
+        const tasks = await Task.findAll({raw: true})
+        res.render('tasks/all',{tasks})
     }
 }
